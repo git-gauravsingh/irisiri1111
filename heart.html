@@ -143,46 +143,76 @@
     </div>
 
     <script>
-        const rightHeart = document.getElementById("rightHeart");
-        const leftHeart = document.getElementById("leftHeart");
-        const fullHeart = document.getElementById("fullHeart");
-        const finalMsg = document.getElementById("finalMsg");
 
-        let isDragging = false;
+const rightHeart = document.getElementById("rightHeart");
+const leftHeart = document.getElementById("leftHeart");
+const fullHeart = document.getElementById("fullHeart");
+const finalMsg = document.getElementById("finalMsg");
 
-        rightHeart.addEventListener("mousedown", () => {
-            isDragging = true;
-        });
+let isDragging = false;
 
-        document.addEventListener("mouseup", () => {
-            isDragging = false;
-        });
+/* -------- PC MOUSE EVENTS -------- */
 
-        document.addEventListener("mousemove", (e) => {
-            if (isDragging) {
-                rightHeart.style.left = e.pageX - 40 + "px";
-                rightHeart.style.top = e.pageY - 40 + "px";
-            }
+rightHeart.addEventListener("mousedown", () => {
+    isDragging = true;
+});
 
-            const leftRect = leftHeart.getBoundingClientRect();
-            const rightRect = rightHeart.getBoundingClientRect();
+document.addEventListener("mouseup", () => {
+    isDragging = false;
+});
 
-            if (
-                Math.abs(leftRect.left - rightRect.left) < 50 &&
-                Math.abs(leftRect.top - rightRect.top) < 50
-            ) {
-                leftHeart.style.display = "none";
-                rightHeart.style.display = "none";
+document.addEventListener("mousemove", (e) => {
+    if (isDragging) {
+        rightHeart.style.left = e.pageX - 40 + "px";
+        rightHeart.style.top = e.pageY - 40 + "px";
+    }
 
-                document.getElementById("beforeName").style.display = "none";
+    checkJoin();
+});
 
-                fullHeart.style.display = "block";
-                finalMsg.style.display = "block";
-            }
-        });
-    </script>
+/* -------- MOBILE TOUCH EVENTS -------- */
+
+rightHeart.addEventListener("touchstart", () => {
+    isDragging = true;
+});
+
+document.addEventListener("touchend", () => {
+    isDragging = false;
+});
+
+document.addEventListener("touchmove", (e) => {
+    if (isDragging) {
+        const touch = e.touches[0];
+        rightHeart.style.left = touch.pageX - 40 + "px";
+        rightHeart.style.top = touch.pageY - 40 + "px";
+        e.preventDefault();
+    }
+
+    checkJoin();
+});
+
+/* -------- JOIN CHECK FUNCTION -------- */
+
+function checkJoin() {
+    const leftRect = leftHeart.getBoundingClientRect();
+    const rightRect = rightHeart.getBoundingClientRect();
+
+    if (
+        Math.abs(leftRect.left - rightRect.left) < 50 &&
+        Math.abs(leftRect.top - rightRect.top) < 50
+    ) {
+        leftHeart.style.display = "none";
+        rightHeart.style.display = "none";
+        document.getElementById("beforeName").style.display = "none";
+        fullHeart.style.display = "block";
+        finalMsg.style.display = "block";
+    }
+}
+
+</script>
 
 </body>
+
 
 
 </html>
