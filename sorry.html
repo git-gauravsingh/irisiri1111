@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <video autoplay muted loop>
+    <source src="video.mp4" type="video/mp4">
+  </video>
+
+  <div class="container">
+    <p>I know I’m not perfect.</p>
+    <p>Sometimes I mess up.</p>
+    <p>
+      Sometimes I don’t express properly.</p>
+    <p>
+      But never doubt this —</p>
+    <p>
+      You are the most important person in my life.</p>
+    <p>
+      One thing I promise you —</p>
+    <p>
+      My love for you is real, pure, and forever.</p>
+    <p>
+      I never want to lose you over mistakes.</p>
+    <p>
+      Let’s keep choosing each other, every single day. 💖</p>
+    <h2>I Am Really Sorry 🥺</h2>
+    <button onclick="localStorage.setItem('reactionType','positive'); goTo('reaction.html')">
+      Maaf Kar Diya 💖
+    </button>
+    <button id="angryBtn" onclick="localStorage.setItem('reactionType','negative'); goTo('reaction.html')">
+      Still Gussa 😡
+    </button>
+  </div>
+  <script>
+    const angryBtn = document.getElementById("angryBtn");
+
+    angryBtn.addEventListener("mouseenter", () => {
+      const container = document.querySelector(".container");
+
+      const maxX = container.offsetWidth - angryBtn.offsetWidth;
+      const maxY = container.offsetHeight - angryBtn.offsetHeight;
+
+      const randomX = Math.random() * maxX;
+      const randomY = Math.random() * maxY;
+
+      angryBtn.style.position = "absolute";
+      angryBtn.style.left = randomX + "px";
+      angryBtn.style.top = randomY + "px";
+    });
+  </script>
+  <script src="script.js"></script>
+</body>
+
+</html>
